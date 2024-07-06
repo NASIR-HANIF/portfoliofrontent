@@ -76,6 +76,10 @@
     .loginForm{
         border-radius: 0;
     }
+    .loginForm > h4{
+        margin: 1vmax;
+    letter-spacing: 10px;
+    }
     .loginForm > div {
         padding: 8vw 6vw;
     }

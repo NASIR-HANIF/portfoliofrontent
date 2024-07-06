@@ -47,6 +47,7 @@ const axiosInstance = axios.create({
     "Content-Type": "application/json",
     credentials: 'include', 
   },
+  withCredentials: true,
 });
 
 export default axiosInstance;

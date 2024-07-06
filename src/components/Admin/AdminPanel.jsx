@@ -7,7 +7,9 @@ import { MdTimeline } from "react-icons/md"
 import { Link } from "react-router-dom"
 import {useDispatch, useSelector} from "react-redux"
 import { logout, updateUser} from "../../actions/user"
-import { useAlert } from 'react-alert'
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
   CLEAR_ERRORS,
   CLEAR_MESSAGE
@@ -15,7 +17,7 @@ import {
 
 const AdminPanel = () => {
     const dispatch = useDispatch()
-    const alert = useAlert()
+   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -77,20 +79,23 @@ const AdminPanel = () => {
   }
 
 
-  useEffect(() => {
-    if (error) {
-        alert.error(error)
-        dispatch({ type : CLEAR_ERRORS})
-    }
-    if (loginMessage) {
-      alert.success(loginMessage)
-      dispatch({ type : CLEAR_MESSAGE})
-    }
-    if (message) {
-        alert.success(message)
-        dispatch({ type : CLEAR_MESSAGE})
-    }
-}, [alert, error, message, dispatch, loginMessage])
+  
+useEffect(() => {
+  if (error) {
+    toast.error(error);
+    dispatch({ type: CLEAR_ERRORS });
+  }
+  if (loginMessage) {
+    toast.success(loginMessage);
+    dispatch({ type: CLEAR_MESSAGE });
+  }
+  if (message) {
+    toast.success(message);
+    dispatch({ type: CLEAR_MESSAGE });
+  }
+}, [error, message, dispatch, loginMessage]);
+
+
 
   return (
     <div className='adminPanel'>

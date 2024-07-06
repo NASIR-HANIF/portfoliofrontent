@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from 'react-alert'
 import { addTimeline, deleteTimeline, getUser } from '../../actions/user';
 import { MdKeyboardBackspace } from "react-icons/md"
 import { CLEAR_ERRORS, CLEAR_MESSAGE } from '../../actions/actions';
 import { Typography, Button } from "@mui/material"
 import { Link } from "react-router-dom"
-import { FaTrash } from "react-icons/fa"
+import { FaTrash } from "react-icons/fa";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const Timeline = () => {
@@ -14,7 +15,6 @@ const Timeline = () => {
     const { user } = useSelector((state) => state.user)
     const { message:loginMessage } = useSelector((state) => state.login)
     const dispatch = useDispatch();
-    const alert = useAlert()
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [date, setDate] = useState("")
@@ -34,21 +34,21 @@ const Timeline = () => {
 
     useEffect(() => {
         if (error) {
-            alert.error(error)
+            toast.error(error)
             dispatch({ type: CLEAR_ERRORS })
         }
 
         if (message) {
-            alert.success(message)
+            toast.success(message)
             dispatch({ type: CLEAR_MESSAGE })
         }
         
         if (loginMessage) {
-            alert.success(loginMessage)
+            toast.success(loginMessage)
             dispatch({ type: CLEAR_MESSAGE })
         }
         
-    }, [alert, error, message, dispatch, loginMessage])
+    }, [ error, message, dispatch, loginMessage])
 
 
     return (
